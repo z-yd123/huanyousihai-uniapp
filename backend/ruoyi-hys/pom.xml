@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 说明：本模块须位于 ruoyi-springboot/ruoyi-hys，父工程为 ruoyi-springboot/pom.xml。
+         安装脚本 scripts/install.sh 会自动放置并挂载到父 pom 与 ruoyi-admin。 -->
+    <parent>
+        <groupId>com.ruoyi</groupId>
+        <artifactId>ruoyi</artifactId>
+        <version>3.9.2</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>ruoyi-hys</artifactId>
+    <packaging>jar</packaging>
+
+    <name>ruoyi-hys</name>
+    <description>环游四海 V1.0 业务模块（会员/线路/商城/订单/两级佣金/钱包）</description>
+
+    <dependencies>
+        <!-- 复用若依的通用能力：AjaxResult / BaseController / ServiceException / 权限注解 / jjwt -->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-common</artifactId>
+        </dependency>
+
+        <!-- Spring MVC（HandlerInterceptor / WebMvcConfigurer）与 Jackson 3，
+             若依 common 仅依赖 spring-web，不含 spring-webmvc，故业务模块显式声明 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 邀请二维码 PNG 生成（纯 Java，无 native 依赖） -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 业务模块是普通 jar，不参与 Spring Boot 重打包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

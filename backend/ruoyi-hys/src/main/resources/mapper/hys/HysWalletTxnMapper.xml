@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hys.mapper.HysWalletTxnMapper">
+
+    <resultMap type="HysWalletTxn" id="HysWalletTxnResult">
+        <id     property="txnId"            column="txn_id"/>
+        <result property="memberId"         column="member_id"/>
+        <result property="txnType"          column="txn_type"/>
+        <result property="amount"           column="amount"/>
+        <result property="fee"              column="fee"/>
+        <result property="balanceAfter"     column="balance_after"/>
+        <result property="counterpartyId"   column="counterparty_id"/>
+        <result property="bizKey"           column="biz_key"/>
+        <result property="remark"           column="remark"/>
+        <result property="createTime"       column="create_time"/>
+        <result property="counterpartyName" column="counterparty_name"/>
+    </resultMap>
+
+    <insert id="insertTxn" parameterType="HysWalletTxn" useGeneratedKeys="true" keyProperty="txnId">
+        insert into hys_wallet_txn (member_id, txn_type, amount, fee, balance_after, counterparty_id, biz_key, remark, create_time)
+        values (#{memberId}, #{txnType}, #{amount}, #{fee}, #{balanceAfter}, #{counterpartyId}, #{bizKey}, #{remark}, now())
+    </insert>
+
+    <select id="selectTxnList" parameterType="HysWalletTxn" resultMap="HysWalletTxnResult">
+        select t.txn_id, t.member_id, t.txn_type, t.amount, t.fee, t.balance_after, t.counterparty_id, t.biz_key,
+               t.remark, t.create_time, c.nickname as counterparty_name
+        from hys_wallet_txn t
+        left join hys_member c on c.member_id = t.counterparty_id
+        <where>
+            <if test="memberId != null">and t.member_id = #{memberId}</if>
+            <if test="txnType != null and txnType != ''">and t.txn_type = #{txnType}</if>
+            <if test="params.types != null">
+                and t.txn_type in
+                <foreach collection="params.types" item="tp" open="(" separator="," close=")">#{tp}</foreach>
+            </if>
+            <if test="params.direction != null and params.direction == 'IN'">and t.amount &gt; 0</if>
+            <if test="params.direction != null and params.direction == 'OUT'">and t.amount &lt; 0</if>
+        </where>
+        order by t.txn_id desc
+    </select>
+
+    <select id="selectByBizKey" parameterType="String" resultMap="HysWalletTxnResult">
+        select txn_id, member_id, txn_type, amount, fee, balance_after, counterparty_id, biz_key, remark, create_time
+        from hys_wallet_txn where biz_key = #{bizKey}
+    </select>
+
+    <select id="sumByTypes" resultType="long">
+        select coalesce(sum(abs(amount)), 0) from hys_wallet_txn
+        where member_id = #{memberId}
+          and txn_type in
+          <foreach collection="types" item="tp" open="(" separator="," close=")">#{tp}</foreach>
+        <choose>
+            <when test="positive">and amount &gt; 0</when>
+            <otherwise>and amount &lt; 0</otherwise>
+        </choose>
+    </select>
+
+    <select id="countTransferToday" resultType="int">
+        select count(1) from hys_wallet_txn
+        where member_id = #{memberId} and txn_type = 'TRANSFER_OUT' and create_time &gt;= #{start}
+    </select>
+</mapper>

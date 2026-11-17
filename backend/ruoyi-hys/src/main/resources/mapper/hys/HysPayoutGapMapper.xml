@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hys.mapper.HysPayoutGapMapper">
+
+    <resultMap type="HysPayoutGap" id="HysPayoutGapResult">
+        <id     property="gapId"        column="gap_id"/>
+        <result property="orderId"      column="order_id"/>
+        <result property="orderNo"      column="order_no"/>
+        <result property="amount"       column="amount"/>
+        <result property="reason"       column="reason"/>
+        <result property="detail"       column="detail"/>
+        <result property="handled"      column="handled"/>
+        <result property="handleRemark" column="handle_remark"/>
+        <result property="createTime"   column="create_time"/>
+        <result property="handleTime"   column="handle_time"/>
+    </resultMap>
+
+    <select id="selectGapList" parameterType="HysPayoutGap" resultMap="HysPayoutGapResult">
+        select gap_id, order_id, order_no, amount, reason, detail, handled, handle_remark, create_time, handle_time
+        from hys_payout_gap
+        <where>
+            <if test="handled != null and handled != ''">and handled = #{handled}</if>
+            <if test="reason != null and reason != ''">and reason = #{reason}</if>
+            <if test="orderNo != null and orderNo != ''">and order_no like concat('%', #{orderNo}, '%')</if>
+        </where>
+        order by gap_id desc
+    </select>
+
+    <select id="selectGapById" parameterType="Long" resultMap="HysPayoutGapResult">
+        select gap_id, order_id, order_no, amount, reason, detail, handled, handle_remark, create_time, handle_time
+        from hys_payout_gap where gap_id = #{gapId}
+    </select>
+
+    <select id="selectByOrderId" parameterType="Long" resultMap="HysPayoutGapResult">
+        select gap_id, order_id, order_no, amount, reason, detail, handled, handle_remark, create_time, handle_time
+        from hys_payout_gap where order_id = #{orderId} limit 1
+    </select>
+
+    <insert id="insertGap" parameterType="HysPayoutGap" useGeneratedKeys="true" keyProperty="gapId">
+        insert into hys_payout_gap (order_id, order_no, amount, reason, detail, handled, create_time)
+        values (#{orderId}, #{orderNo}, #{amount}, #{reason}, #{detail}, '0', now())
+    </insert>
+
+    <update id="updateGap" parameterType="HysPayoutGap">
+        update hys_payout_gap
+        set handled = #{handled}, handle_remark = #{handleRemark}, handle_time = now()
+        where gap_id = #{gapId}
+    </update>
+
+    <select id="countUnhandled" resultType="long">
+        select count(1) from hys_payout_gap where handled = '0'
+    </select>
+</mapper>

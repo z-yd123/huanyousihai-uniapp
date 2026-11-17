@@ -1,0 +1,144 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^hys-(.*)": "@/components/hys-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": true,
+        "backgroundColor": "#F6F2E9"
+      }
+    },
+    {
+      "path": "pages/route/detail",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/mall/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/product/detail",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/order/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/order/detail",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/mine/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/share/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/wallet/income",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/wallet/recharge",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/wallet/withdraw",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/commission/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/auth/login",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/auth/register",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/auth/password",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/auth/forgot",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/poster/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/vip/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/placeholder/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/album/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/album/detail",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    },
+    {
+      "path": "pages/admin/index",
+      "style": { "navigationStyle": "custom", "backgroundColor": "#F6F2E9" }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#F6F2E9",
+    "backgroundColor": "#F6F2E9",
+    "backgroundColorTop": "#F6F2E9",
+    "backgroundColorBottom": "#F6F2E9"
+  },
+  "tabBar": {
+    "color": "#55615A",
+    "selectedColor": "#1F5C4B",
+    "backgroundColor": "#FFFDF8",
+    "borderStyle": "white",
+    "fontSize": "11px",
+    "iconWidth": "24px",
+    "spacing": "4px",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-on.png"
+      },
+      {
+        "pagePath": "pages/mall/index",
+        "text": "商城",
+        "iconPath": "static/tabbar/store.png",
+        "selectedIconPath": "static/tabbar/store-on.png"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "text": "订单",
+        "iconPath": "static/tabbar/receipt.png",
+        "selectedIconPath": "static/tabbar/receipt-on.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "static/tabbar/user.png",
+        "selectedIconPath": "static/tabbar/user-on.png"
+      }
+    ]
+  }
+}

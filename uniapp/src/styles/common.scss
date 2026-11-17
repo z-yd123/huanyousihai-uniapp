@@ -1,0 +1,354 @@
+/* ============================================================================
+   环游四海 V1.0 · 全局样式与语义令牌
+   浅色 / 夜间双主题：夜间为 1.0 原生能力（跟系统），小程序内不提供切换入口
+   ========================================================================== */
+
+page,
+body {
+  /* ---------- 语义色 · 浅色 Light ---------- */
+  --c-ink: #1c2b26;
+  --c-pine: #1f5c4b;
+  --c-pine-deep: #144234;
+  --c-terracotta: #be522e;
+  --c-sand: #f6f2e9;
+  --c-paper: #fffdf8;
+  --c-mist: #e4e0d5;
+  --c-slate: #55615a;
+  --c-vip-surface: #f3e9d2;
+  --c-vip-bronze: #816338;
+  --c-on-pine: #ffffff;
+  --c-on-terracotta: #ffffff;
+  --c-success: #2e6b4f;
+  --c-warning: #956312;
+  --c-danger: #b23b2e;
+  --c-info: #2c5a7a;
+  --c-disabled: #a9b0aa;
+  --c-disabled-surface: #ecece2;
+  --c-scrim: rgba(28, 43, 38, 0.45);
+  --sh-card: 0 8rpx 24rpx rgba(28, 43, 38, 0.06), 0 32rpx 96rpx rgba(28, 43, 38, 0.04);
+  --sh-hover: 0 16rpx 48rpx rgba(28, 43, 38, 0.08);
+}
+
+/* ---------- 语义色 · 夜间 Dark（跟随系统） ---------- */
+@media (prefers-color-scheme: dark) {
+  page,
+  body {
+    --c-ink: #e8ede7;
+    --c-pine: #7fcba8;
+    --c-pine-deep: #5fae8c;
+    --c-terracotta: #e88a62;
+    --c-sand: #121a17;
+    --c-paper: #1b2621;
+    --c-mist: #33423a;
+    --c-slate: #a3b0a6;
+    --c-vip-surface: #3a3020;
+    --c-vip-bronze: #d9b578;
+    --c-on-pine: #10261e;
+    --c-on-terracotta: #2a1409;
+    --c-success: #75c79b;
+    --c-warning: #e3b44a;
+    --c-danger: #e88376;
+    --c-info: #7fb2d6;
+    --c-disabled: #66736b;
+    --c-disabled-surface: #232f29;
+    --c-scrim: rgba(0, 0, 0, 0.65);
+    --sh-card: 0 8rpx 24rpx rgba(0, 0, 0, 0.32);
+    --sh-hover: 0 16rpx 48rpx rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ---------- H5 预览：?theme=dark 强制夜间稿 ---------- */
+html[data-theme='dark'] page,
+html[data-theme='dark'] body {
+  --c-ink: #e8ede7;
+  --c-pine: #7fcba8;
+  --c-pine-deep: #5fae8c;
+  --c-terracotta: #e88a62;
+  --c-sand: #121a17;
+  --c-paper: #1b2621;
+  --c-mist: #33423a;
+  --c-slate: #a3b0a6;
+  --c-vip-surface: #3a3020;
+  --c-vip-bronze: #d9b578;
+  --c-on-pine: #10261e;
+  --c-on-terracotta: #2a1409;
+  --c-success: #75c79b;
+  --c-warning: #e3b44a;
+  --c-danger: #e88376;
+  --c-info: #7fb2d6;
+  --c-disabled: #66736b;
+  --c-disabled-surface: #232f29;
+  --c-scrim: rgba(0, 0, 0, 0.65);
+  --sh-card: 0 8rpx 24rpx rgba(0, 0, 0, 0.32);
+  --sh-hover: 0 16rpx 48rpx rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme='light'] page,
+html[data-theme='light'] body {
+  --c-ink: #1c2b26;
+  --c-pine: #1f5c4b;
+  --c-pine-deep: #144234;
+  --c-terracotta: #be522e;
+  --c-sand: #f6f2e9;
+  --c-paper: #fffdf8;
+  --c-mist: #e4e0d5;
+  --c-slate: #55615a;
+  --c-vip-surface: #f3e9d2;
+  --c-vip-bronze: #816338;
+  --c-on-pine: #ffffff;
+  --c-on-terracotta: #ffffff;
+  --c-success: #2e6b4f;
+  --c-warning: #956312;
+  --c-danger: #b23b2e;
+  --c-info: #2c5a7a;
+  --c-disabled: #a9b0aa;
+  --c-disabled-surface: #ecece2;
+}
+
+/* ============================================================ 基础排版 */
+page {
+  background: var(--c-sand);
+  color: var(--c-ink);
+  font-family: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+view,
+text,
+input,
+textarea,
+button {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  background: var(--c-sand);
+  color: var(--c-ink);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.wrap {
+  padding: 0 32rpx;
+}
+
+/* ============================================================ 排版类 */
+.h1 { font-size: 44rpx; font-weight: 700; line-height: 1.24; letter-spacing: 0.2rpx; }
+.h2 { font-size: 36rpx; font-weight: 600; line-height: 1.3; }
+.h3 { font-size: 32rpx; font-weight: 600; line-height: 1.35; }
+.display { font-size: 56rpx; font-weight: 700; line-height: 1.2; }
+.body-l { font-size: 30rpx; line-height: 1.7; }
+.body { font-size: 28rpx; line-height: 1.6; }
+.body-s { font-size: 26rpx; line-height: 1.6; }
+.caption { font-size: 24rpx; font-weight: 500; }
+.micro { font-size: 22rpx; font-weight: 500; line-height: 1.5; }
+.muted { color: var(--c-slate); }
+.dim { color: var(--c-disabled); }
+.num { font-variant-numeric: tabular-nums; }
+
+.serif {
+  font-family: "Instrument Serif", "Songti SC", "Source Han Serif SC", Georgia, serif;
+  letter-spacing: 1rpx;
+}
+
+/* ============================================================ 卡片 */
+.card {
+  background: var(--c-paper);
+  border: 1rpx solid var(--c-mist);
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(28, 43, 38, 0.05);
+}
+.card-flat {
+  background: var(--c-paper);
+  border: 1rpx solid var(--c-mist);
+  border-radius: 24rpx;
+}
+
+/* ============================================================ 区块标题 */
+.sec {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40rpx 0 20rpx;
+}
+.sec-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--c-ink);
+}
+.sec-no {
+  color: var(--c-slate);
+  font-weight: 600;
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+.sec-more {
+  font-size: 26rpx;
+  color: var(--c-slate);
+}
+
+/* ============================================================ 列表行 */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 104rpx;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--c-mist);
+}
+.row:last-child { border-bottom: none; }
+.row-main { flex: 1; min-width: 0; }
+.row-t { display: block; font-size: 28rpx; color: var(--c-ink); }
+.row-d { display: block; font-size: 24rpx; color: var(--c-slate); margin-top: 6rpx; line-height: 1.5; }
+
+.kv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 0;
+  font-size: 26rpx;
+}
+.kv-k { color: var(--c-slate); }
+.kv-v { color: var(--c-ink); }
+.kv-v.num { text-align: right; }
+
+/* ============================================================ 标签 / 徽标 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 40rpx;
+  padding: 0 14rpx;
+  border: 1rpx solid var(--c-mist);
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  color: var(--c-ink);
+  background: var(--c-paper);
+}
+.tag-pine { border-color: var(--c-pine); color: var(--c-pine); }
+.tag-vip { border-color: var(--c-vip-bronze); color: var(--c-vip-bronze); background: transparent; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ============================================================ 价格 */
+.price-vip { color: var(--c-terracotta); font-variant-numeric: tabular-nums; }
+.price-normal { color: var(--c-slate); font-variant-numeric: tabular-nums; }
+
+/* ============================================================ 按钮（C-22） */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+.btn-primary { background: var(--c-pine); color: var(--c-on-pine); }
+.btn-vip { background: var(--c-terracotta); color: var(--c-on-terracotta); }
+.btn-secondary {
+  background: transparent;
+  color: var(--c-pine);
+  border: 1rpx solid var(--c-pine);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--c-pine);
+}
+.btn-disabled {
+  background: var(--c-disabled-surface) !important;
+  color: var(--c-disabled) !important;
+  border-color: transparent !important;
+}
+.btn:active { opacity: 0.92; transform: scale(0.99); }
+
+.btn-sm {
+  height: 68rpx;
+  padding: 0 28rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+/* ============================================================ 输入（C-11） */
+.field {
+  height: 92rpx;
+  padding: 0 24rpx;
+  background: var(--c-paper);
+  border: 1rpx solid var(--c-mist);
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  color: var(--c-ink);
+}
+.field-ph { color: var(--c-disabled); font-size: 28rpx; }
+.field-error { border-color: var(--c-danger); }
+
+/* ============================================================ 占位图 */
+.ph {
+  background: var(--c-mist);
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-slate);
+  font-size: 24rpx;
+  overflow: hidden;
+}
+
+/* ============================================================ 底栏 */
+.dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--c-paper);
+  border-top: 1rpx solid var(--c-mist);
+  padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+.dock-pad { height: 200rpx; }
+
+/* ============================================================ 骨架屏 */
+@keyframes hysShimmer {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.95; }
+  100% { opacity: 0.55; }
+}
+.sk {
+  background: var(--c-mist);
+  border-radius: 12rpx;
+  animation: hysShimmer 1.4s ease-in-out infinite;
+}
+
+/* ============================================================ 动画 */
+@keyframes hysReveal {
+  from { opacity: 0; transform: translateY(16rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { animation: hysReveal 0.32s ease both; }
+
+/* 去掉 button 默认样式（uni button / 原生 button） */
+button {
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+  background: transparent;
+}
+button::after { border: none; }

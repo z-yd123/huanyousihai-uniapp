@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hys.mapper.HysCommissionMapper">
+
+    <resultMap type="HysCommission" id="HysCommissionResult">
+        <id     property="commissionId" column="commission_id"/>
+        <result property="memberId"     column="member_id"/>
+        <result property="orderId"      column="order_id"/>
+        <result property="orderNo"      column="order_no"/>
+        <result property="level"        column="level"/>
+        <result property="amount"       column="amount"/>
+        <result property="status"       column="status"/>
+        <result property="remark"       column="remark"/>
+        <result property="settleTime"   column="settle_time"/>
+        <result property="createTime"   column="create_time"/>
+        <result property="memberName"   column="member_name"/>
+        <result property="memberPhone"  column="member_phone"/>
+        <result property="productTitle" column="product_title"/>
+    </resultMap>
+
+    <select id="selectCommissionList" parameterType="HysCommission" resultMap="HysCommissionResult">
+        select k.commission_id, k.member_id, k.order_id, k.order_no, k.level, k.amount, k.status, k.remark,
+               k.settle_time, k.create_time,
+               m.nickname as member_name, m.phone as member_phone, o.product_title
+        from hys_commission k
+        left join hys_member m on m.member_id = k.member_id
+        left join hys_order o on o.order_id = k.order_id
+        <where>
+            <if test="memberId != null">and k.member_id = #{memberId}</if>
+            <if test="level != null and level != ''">and k.level = #{level}</if>
+            <if test="status != null">and k.status = #{status}</if>
+            <if test="orderNo != null and orderNo != ''">and k.order_no like concat('%', #{orderNo}, '%')</if>
+            <if test="params.beginTime != null and params.beginTime != ''">
+                and k.create_time &gt;= #{params.beginTime}
+            </if>
+            <if test="params.endTime != null and params.endTime != ''">
+                and k.create_time &lt;= concat(#{params.endTime}, ' 23:59:59')
+            </if>
+        </where>
+        order by k.commission_id desc
+    </select>
+
+    <select id="selectByOrderId" parameterType="Long" resultMap="HysCommissionResult">
+        select commission_id, member_id, order_id, order_no, level, amount, status, remark, settle_time, create_time
+        from hys_commission where order_id = #{orderId} order by level desc
+    </select>
+
+    <insert id="insertCommission" parameterType="HysCommission" useGeneratedKeys="true" keyProperty="commissionId">
+        insert into hys_commission (member_id, order_id, order_no, level, amount, status, remark, settle_time, create_time)
+        values (#{memberId}, #{orderId}, #{orderNo}, #{level}, #{amount}, #{status}, #{remark}, #{settleTime}, now())
+    </insert>
+
+    <select id="sumAmount" resultType="long">
+        select coalesce(sum(amount), 0) from hys_commission
+        where member_id = #{memberId}
+        <if test="level != null and level != ''">and level = #{level}</if>
+        <if test="status != null">and status = #{status}</if>
+    </select>
+
+    <select id="countByMember" resultType="int">
+        select count(1) from hys_commission
+        where member_id = #{memberId}
+        <if test="level != null and level != ''">and level = #{level}</if>
+    </select>
+
+    <update id="updateStatus">
+        update hys_commission set status = #{status} where commission_id = #{commissionId}
+    </update>
+
+    <select id="sumTotal" resultType="long">
+        select coalesce(sum(amount), 0) from hys_commission where status = 1
+    </select>
+
+    <select id="sumToday" resultType="long">
+        select coalesce(sum(amount), 0) from hys_commission where status = 1 and create_time &gt;= #{start}
+    </select>
+
+    <select id="countByStatus" resultType="long">
+        select count(1) from hys_commission where status = #{status}
+    </select>
+</mapper>

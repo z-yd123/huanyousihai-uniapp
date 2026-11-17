@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hys.mapper.HysAlbumMapper">
+
+    <resultMap type="HysAlbum" id="HysAlbumResult">
+        <id     property="albumId"      column="album_id"/>
+        <result property="memberId"     column="member_id"/>
+        <result property="productId"    column="product_id"/>
+        <result property="title"        column="title"/>
+        <result property="travelDate"   column="travel_date"/>
+        <result property="cover"        column="cover"/>
+        <result property="mediaJson"    column="media_json"/>
+        <result property="description"  column="description"/>
+        <result property="status"       column="status"/>
+        <result property="remark"       column="remark"/>
+        <result property="createTime"   column="create_time"/>
+        <result property="updateTime"   column="update_time"/>
+        <result property="memberName"   column="member_name"/>
+        <result property="productTitle" column="product_title"/>
+    </resultMap>
+
+    <select id="selectAlbumList" parameterType="HysAlbum" resultMap="HysAlbumResult">
+        select a.album_id, a.member_id, a.product_id, a.title, a.travel_date, a.cover, a.media_json, a.description,
+               a.status, a.create_time, a.update_time, m.nickname as member_name, p.title as product_title
+        from hys_album a
+        left join hys_member m on m.member_id = a.member_id
+        left join hys_product p on p.product_id = a.product_id
+        <where>
+            <if test="memberId != null">and a.member_id = #{memberId}</if>
+            <if test="title != null and title != ''">and a.title like concat('%', #{title}, '%')</if>
+            <if test="status != null and status != ''">and a.status = #{status}</if>
+        </where>
+        order by a.travel_date desc, a.album_id desc
+    </select>
+
+    <select id="selectAlbumById" parameterType="Long" resultMap="HysAlbumResult">
+        select a.album_id, a.member_id, a.product_id, a.title, a.travel_date, a.cover, a.media_json, a.description,
+               a.status, a.create_time, a.update_time, m.nickname as member_name, p.title as product_title
+        from hys_album a
+        left join hys_member m on m.member_id = a.member_id
+        left join hys_product p on p.product_id = a.product_id
+        where a.album_id = #{albumId}
+    </select>
+
+    <insert id="insertAlbum" parameterType="HysAlbum" useGeneratedKeys="true" keyProperty="albumId">
+        insert into hys_album (member_id, product_id, title, travel_date, cover, media_json, description, status,
+                               create_time, update_time)
+        values (#{memberId}, #{productId}, #{title}, #{travelDate}, #{cover}, #{mediaJson}, #{description},
+                #{status}, now(), now())
+    </insert>
+
+    <update id="updateAlbum" parameterType="HysAlbum">
+        update hys_album
+        <set>
+            <if test="memberId != null">member_id = #{memberId},</if>
+            <if test="productId != null">product_id = #{productId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="travelDate != null">travel_date = #{travelDate},</if>
+            <if test="cover != null">cover = #{cover},</if>
+            <if test="mediaJson != null">media_json = #{mediaJson},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = now()
+        </set>
+        where album_id = #{albumId}
+    </update>
+
+    <delete id="deleteAlbumById" parameterType="Long">
+        delete from hys_album where album_id = #{albumId}
+    </delete>
+</mapper>

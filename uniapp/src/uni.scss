@@ -1,0 +1,56 @@
+/* ============================================================================
+   环游四海 V1.0 · 设计令牌（uni.scss 全局注入）
+   来源：《环游四海 V1.0 设计系统》色彩令牌 / 字阶 / 间距 / 圆角 / 三层暖阴影
+   375px 画板 = 750rpx，故所有 px 令牌 × 2 即 rpx
+   ========================================================================== */
+
+/* ---------- 语义色（浅色基线） ---------- */
+$ink: #1C2B26;
+$pine: #1F5C4B;
+$pine-deep: #144234;
+$terracotta: #BE522E;
+$sand: #F6F2E9;
+$paper: #FFFDF8;
+$mist: #E4E0D5;
+$slate: #55615A;
+$vip-surface: #F3E9D2;
+$vip-bronze: #816338;
+$success: #2E6B4F;
+$warning: #956312;
+$danger: #B23B2E;
+$info: #2C5A7A;
+$disabled: #A9B0AA;
+$disabled-surface: #ECEAE2;
+
+/* ---------- 字阶（rpx） ---------- */
+$fs-display: 56rpx;
+$fs-h1: 44rpx;
+$fs-h2: 36rpx;
+$fs-h3: 32rpx;
+$fs-body-l: 30rpx;
+$fs-body: 28rpx;
+$fs-body-s: 26rpx;
+$fs-caption: 24rpx;
+$fs-micro: 22rpx;
+$fs-amount-l: 56rpx;
+$fs-amount-m: 36rpx;
+
+/* ---------- 间距 / 圆角 ---------- */
+$sp-1: 8rpx;
+$sp-2: 16rpx;
+$sp-3: 24rpx;
+$sp-4: 32rpx;
+$sp-5: 48rpx;
+$sp-6: 64rpx;
+$sp-7: 96rpx;
+
+$r-xs: 8rpx;
+$r-sm: 16rpx;
+$r-md: 24rpx;
+$r-lg: 32rpx;
+$r-pill: 999rpx;
+
+$page-pad: 32rpx;
+
+$font-sans: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+$font-serif: "Instrument Serif", "Songti SC", "Source Han Serif SC", Georgia, serif;
